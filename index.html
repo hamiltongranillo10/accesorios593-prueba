@@ -146,8 +146,6 @@ main>section:not(.hero),footer{content-visibility:auto;contain-intrinsic-size:au
 .ph{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;border-radius:14px;overflow:hidden;background:#141022;margin-bottom:14px;cursor:zoom-in}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .ph:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #ffffff1f;background:linear-gradient(180deg,transparent 62%,#0b0912a6)}
-.pv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;transition:opacity .5s;pointer-events:none}
-.pv.on{opacity:1}
 .badge{z-index:2}
 .card:hover .ph img{transform:scale(1.06)}
 .card:hover{box-shadow:0 0 0 1px #ff2bd655,0 18px 50px -14px #8b3dffaa}
@@ -160,6 +158,21 @@ main>section:not(.hero),footer{content-visibility:auto;contain-intrinsic-size:au
 .zf .btn{flex:none;min-height:44px;padding:.5em 1.1em .5em 1.2em;font-size:.9rem}
 .x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#000b;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
 @media (max-width:600px){.grid{grid-template-columns:1fr 1fr;gap:12px}.card{padding:12px}.vis{height:120px}.vis svg{height:94px}.card h3{font-size:1rem}.card p{font-size:.85rem;line-height:1.45}.cols li{width:14px;height:14px}.card .btn{padding:.6em .8em}.ck{font-size:.85rem;padding:12px 14px}}
+/* colección destacada (videos) */
+.show{position:relative;background:radial-gradient(60% 50% at 50% 0%,#8b3dff1f,transparent 70%),var(--bg)}
+.show-h{max-width:640px}
+.reels{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.reel{position:relative;aspect-ratio:9/16;max-height:640px;border-radius:24px;overflow:hidden;background:#000;box-shadow:0 0 0 1px #ffffff14,0 30px 60px -30px #000}
+.reel video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.reel-t{position:absolute;inset:auto 0 0;display:grid;gap:6px;justify-items:start;padding:60px 20px 20px;background:linear-gradient(180deg,transparent,#000000d9 55%)}
+.reel-t h3{font-size:1.15rem;font-weight:600;letter-spacing:-.03em;margin:0 0 8px}
+.reel-k{font-size:.66rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#d9c8ff}
+.reel .btn{min-height:44px;padding:.55em 1.3em;font-size:.92rem}
+@media (max-width:820px){
+  .reels{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-16px;padding:4px 16px 8px;scrollbar-width:none}
+  .reels::-webkit-scrollbar{display:none}
+  .reel{flex:0 0 76%;scroll-snap-align:center;max-height:none}
+}
 /* why */
 .why{background:var(--bg2);border-block:1px solid var(--line)}
 .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
@@ -381,6 +394,42 @@ h2 .grad{display:inline-block}
   </div>
 </div>
 
+<section class="show" aria-labelledby="t-show">
+  <div class="wrap">
+    <div class="show-h">
+      <span class="tag"><i></i>Colección destacada</span>
+      <h2 id="t-show" class="rv">Hechas para <span class="grad">tu iPhone</span></h2>
+      <p class="sub">Las fundas favoritas de nuestros clientes, en movimiento.</p>
+    </div>
+    <div class="reels">
+      <article class="reel">
+        <video class="rl" data-v="video/destacado-cuero.mp4" poster="video/destacado-cuero.webp" muted loop playsinline disablepictureinpicture preload="none" width="540" height="960" aria-hidden="true"></video>
+        <div class="reel-t">
+          <span class="reel-k">Cuero · Anclaje magnético</span>
+          <h3>Leather Case MagSafe</h3>
+          <button class="btn btn-p js-want" type="button" data-p="Leather Case MagSafe">Lo quiero</button>
+        </div>
+      </article>
+      <article class="reel">
+        <video class="rl" data-v="video/destacado-silicona.mp4" poster="video/destacado-silicona.webp" muted loop playsinline disablepictureinpicture preload="none" width="540" height="960" aria-hidden="true"></video>
+        <div class="reel-t">
+          <span class="reel-k">Silicona · Colores de temporada</span>
+          <h3>Silicone Case MagSafe</h3>
+          <button class="btn btn-p js-want" type="button" data-p="Silicone Case MagSafe">Lo quiero</button>
+        </div>
+      </article>
+      <article class="reel">
+        <video class="rl" data-v="video/destacado-madera.mp4" poster="video/destacado-madera.webp" muted loop playsinline disablepictureinpicture preload="none" width="540" height="960" aria-hidden="true"></video>
+        <div class="reel-t">
+          <span class="reel-k">Madera real · Marco metálico</span>
+          <h3>Case premium de madera</h3>
+          <button class="btn btn-p js-want" type="button" data-p="Case premium de madera">Lo quiero</button>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
 <section id="catalogo" aria-labelledby="t-cat">
   <div class="wrap">
     <h2 id="t-cat" class="rv">Nuestro <span class="grad">catálogo</span></h2>
@@ -397,7 +446,7 @@ h2 .grad{display:inline-block}
     <div class="grid" id="grid">
       <article class="card rv" data-cat="fundas magsafe">
         <button class="ph" type="button" data-full="img/p/funda-cuero-520.webp" aria-label="Ampliar foto: Leather Case MagSafe">
-          <img src="img/p/funda-cuero-340.webp" srcset="img/p/funda-cuero-340.webp 340w, img/p/funda-cuero-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Leather Case MagSafe" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-cuero.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video>
+          <img src="img/p/funda-cuero-340.webp" srcset="img/p/funda-cuero-340.webp 340w, img/p/funda-cuero-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Leather Case MagSafe" loading="lazy" decoding="async">
         </button>
         <h3>Leather Case MagSafe</h3>
         <p>Acabado tipo cuero, tacto suave y anclaje magnético firme. Del iPhone 13 Pro al 16 Pro Max.</p>
@@ -406,7 +455,7 @@ h2 .grad{display:inline-block}
       </article>
       <article class="card rv" data-cat="fundas magsafe">
         <button class="ph" type="button" data-full="img/p/funda-silicona-520.webp" aria-label="Ampliar foto: Silicone Case MagSafe">
-          <img src="img/p/funda-silicona-340.webp" srcset="img/p/funda-silicona-340.webp 340w, img/p/funda-silicona-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Silicone Case MagSafe" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-silicona.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video><span class="badge">iPhone 17</span>
+          <img src="img/p/funda-silicona-340.webp" srcset="img/p/funda-silicona-340.webp 340w, img/p/funda-silicona-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Silicone Case MagSafe" loading="lazy" decoding="async"><span class="badge">iPhone 17</span>
         </button>
         <h3>Silicone Case MagSafe</h3>
         <p>Interior de microfibra y colores de temporada. Disponible para iPhone 17 Pro Max.</p>
@@ -415,7 +464,7 @@ h2 .grad{display:inline-block}
       </article>
       <article class="card rv" data-cat="fundas">
         <button class="ph" type="button" data-full="img/p/funda-madera-520.webp" aria-label="Ampliar foto: Case premium de madera">
-          <img src="img/p/funda-madera-340.webp" srcset="img/p/funda-madera-340.webp 340w, img/p/funda-madera-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case premium de madera" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-madera.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video>
+          <img src="img/p/funda-madera-340.webp" srcset="img/p/funda-madera-340.webp 340w, img/p/funda-madera-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case premium de madera" loading="lazy" decoding="async">
         </button>
         <h3>Case premium de madera</h3>
         <p>Textura de madera con marco de cámara metálico. Un diseño clásico y elegante.</p>
@@ -424,7 +473,7 @@ h2 .grad{display:inline-block}
       </article>
       <article class="card rv" data-cat="fundas magsafe">
         <button class="ph" type="button" data-full="img/p/funda-matte-520.webp" aria-label="Ampliar foto: Case MagSafe Matte">
-          <img src="img/p/funda-matte-340.webp" srcset="img/p/funda-matte-340.webp 340w, img/p/funda-matte-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case MagSafe Matte" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-matte.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video>
+          <img src="img/p/funda-matte-340.webp" srcset="img/p/funda-matte-340.webp 340w, img/p/funda-matte-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case MagSafe Matte" loading="lazy" decoding="async">
         </button>
         <h3>Case MagSafe Matte</h3>
         <p>Acabado mate translúcido que no deja huellas, con anillo magnético.</p>

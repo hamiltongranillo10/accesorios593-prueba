@@ -158,7 +158,7 @@
 
   var prod = $('#prod');
   var ph = d.createElement('option'); ph.value = ''; ph.textContent = 'Elige un producto'; prod.appendChild(ph);
-  $$('.js-want').map(function (b) { return b.getAttribute('data-p'); }).concat(['Otro / varios productos']).forEach(function (n) {
+  $$('.js-want').map(function (b) { return b.getAttribute('data-p'); }).filter(function (n, i, a) { return a.indexOf(n) === i; }).concat(['Otro / varios productos']).forEach(function (n) {
     var o = d.createElement('option'); o.value = o.textContent = n; prod.appendChild(o);
   });
 
@@ -222,27 +222,24 @@
   });
   show(1);
 
-  /* ===== Videos del catálogo =====
-     MP4 H.264 (lo decodifica el chip de video del equipo, por eso no pesa).
-     Se descargan solo cuando la tarjeta se acerca, se reproducen solos cuando
-     se ve al menos la mitad y se pausan al salir de la pantalla. */
-  var vids = $$('video.pv');
-  if (vids.length && !reduce && 'IntersectionObserver' in window) {
-    var vio = new IntersectionObserver(function (es) {
+  /* ===== Colección destacada: videos verticales =====
+     MP4 H.264 liviano. Se descargan solo al acercarse a la sección y cada uno
+     se reproduce solo cuando se ve al menos el 60 % (en el carrusel del celular,
+     solo el que está al frente). */
+  var reelV = $$('video.rl');
+  if (reelV.length && !reduce && 'IntersectionObserver' in window) {
+    var rio = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         var v = e.target;
-        if (e.intersectionRatio >= 0.5) {
-          if (!v.getAttribute('src')) {
-            v.src = v.getAttribute('data-v');
-            v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
-          }
-          var p = v.play(); if (p && p.catch) p.catch(function () { /* sin reproducción automática: queda la foto */ });
+        if (e.intersectionRatio >= 0.6) {
+          if (!v.getAttribute('src')) v.src = v.getAttribute('data-v');
+          var p = v.play(); if (p && p.catch) p.catch(function () { /* sin reproducción automática: queda la portada */ });
         } else if (!v.paused) {
           v.pause();
         }
       });
-    }, { threshold: [0, 0.5] });
-    vids.forEach(function (v) { vio.observe(v); });
+    }, { threshold: [0, 0.6] });
+    reelV.forEach(function (v) { rio.observe(v); });
   }
 
   /* ===== Ampliar foto del producto ===== */
