@@ -162,6 +162,30 @@
   });
   show(1);
 
+  /* ===== Videos del catálogo: se cargan y reproducen solo cuando la tarjeta está en pantalla ===== */
+  var vids = $$('.pv');
+  if (vids.length && !reduce && 'IntersectionObserver' in window) {
+    var vio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        var v = e.target;
+        if (e.isIntersecting) {
+          if (!v.getAttribute('data-ok')) {
+            var size = v.clientWidth * (window.devicePixelRatio || 1) > 400 ? '544' : '368';
+            var base = v.getAttribute('data-v') + '-' + size;
+            v.innerHTML = '<source src="' + base + '.webm" type="video/webm"><source src="' + base + '.mp4" type="video/mp4">';
+            v.setAttribute('data-ok', '1');
+            v.addEventListener('playing', function () { v.classList.add('on'); });
+            v.load();
+          }
+          var p = v.play(); if (p && p.catch) p.catch(function () { /* sin reproducción automática: queda la foto */ });
+        } else if (!v.paused) {
+          v.pause();
+        }
+      });
+    }, { rootMargin: '150px 0px' });
+    vids.forEach(function (v) { vio.observe(v); });
+  }
+
   /* ===== Ampliar foto del producto ===== */
   var zoom = $('#zoom');
   if (zoom && zoom.showModal) {
