@@ -146,7 +146,7 @@ main>section:not(.hero),footer{content-visibility:auto;contain-intrinsic-size:au
 .ph{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;border-radius:14px;overflow:hidden;background:#141022;margin-bottom:14px;cursor:zoom-in}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
 .ph:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #ffffff1f;background:linear-gradient(180deg,transparent 62%,#0b0912a6)}
-.pv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;transition:opacity .6s}
+.pv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#000;opacity:0;transition:opacity .5s;pointer-events:none}
 .pv.on{opacity:1}
 .badge{z-index:2}
 .card:hover .ph img{transform:scale(1.06)}
@@ -274,7 +274,7 @@ footer a:hover{color:var(--txt)}
 @media (max-width:820px){.aura{width:290px;height:290px}}
 .go .hero .btn-wa:after{animation:shine 5s cubic-bezier(.2,.8,.2,1) 1.5s infinite}
 @keyframes shine{0%,55%{transform:translateX(-130%)}75%,100%{transform:translateX(130%)}}
-.card{--mx:50%;--my:0%;transform-style:preserve-3d}
+.card{--mx:50%;--my:0%}
 .card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--mx) var(--my),#a45cff26,transparent 45%)}
 .card:hover:before{opacity:1}
 .card{position:relative}
@@ -397,7 +397,7 @@ h2 .grad{display:inline-block}
     <div class="grid" id="grid">
       <article class="card rv" data-cat="fundas magsafe">
         <button class="ph" type="button" data-full="img/p/funda-cuero-520.webp" aria-label="Ampliar foto: Leather Case MagSafe">
-          <img src="img/p/funda-cuero-340.webp" srcset="img/p/funda-cuero-340.webp 340w, img/p/funda-cuero-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Leather Case MagSafe" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-cuero" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <img src="img/p/funda-cuero-340.webp" srcset="img/p/funda-cuero-340.webp 340w, img/p/funda-cuero-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Leather Case MagSafe" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-cuero.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video>
         </button>
         <h3>Leather Case MagSafe</h3>
         <p>Acabado tipo cuero, tacto suave y anclaje magnético firme. Del iPhone 13 Pro al 16 Pro Max.</p>
@@ -406,7 +406,7 @@ h2 .grad{display:inline-block}
       </article>
       <article class="card rv" data-cat="fundas magsafe">
         <button class="ph" type="button" data-full="img/p/funda-silicona-520.webp" aria-label="Ampliar foto: Silicone Case MagSafe">
-          <img src="img/p/funda-silicona-340.webp" srcset="img/p/funda-silicona-340.webp 340w, img/p/funda-silicona-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Silicone Case MagSafe" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-silicona" muted loop playsinline preload="none" aria-hidden="true"></video><span class="badge">iPhone 17</span>
+          <img src="img/p/funda-silicona-340.webp" srcset="img/p/funda-silicona-340.webp 340w, img/p/funda-silicona-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Silicone Case MagSafe" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-silicona.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video><span class="badge">iPhone 17</span>
         </button>
         <h3>Silicone Case MagSafe</h3>
         <p>Interior de microfibra y colores de temporada. Disponible para iPhone 17 Pro Max.</p>
@@ -415,7 +415,7 @@ h2 .grad{display:inline-block}
       </article>
       <article class="card rv" data-cat="fundas">
         <button class="ph" type="button" data-full="img/p/funda-madera-520.webp" aria-label="Ampliar foto: Case premium de madera">
-          <img src="img/p/funda-madera-340.webp" srcset="img/p/funda-madera-340.webp 340w, img/p/funda-madera-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case premium de madera" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-madera" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <img src="img/p/funda-madera-340.webp" srcset="img/p/funda-madera-340.webp 340w, img/p/funda-madera-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case premium de madera" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-madera.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video>
         </button>
         <h3>Case premium de madera</h3>
         <p>Textura de madera con marco de cámara metálico. Un diseño clásico y elegante.</p>
@@ -424,7 +424,7 @@ h2 .grad{display:inline-block}
       </article>
       <article class="card rv" data-cat="fundas magsafe">
         <button class="ph" type="button" data-full="img/p/funda-matte-520.webp" aria-label="Ampliar foto: Case MagSafe Matte">
-          <img src="img/p/funda-matte-340.webp" srcset="img/p/funda-matte-340.webp 340w, img/p/funda-matte-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case MagSafe Matte" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-matte" muted loop playsinline preload="none" aria-hidden="true"></video>
+          <img src="img/p/funda-matte-340.webp" srcset="img/p/funda-matte-340.webp 340w, img/p/funda-matte-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case MagSafe Matte" loading="lazy" decoding="async"><video class="pv" data-v="video/funda-matte.mp4" muted loop playsinline disablepictureinpicture preload="none" width="368" height="460" aria-hidden="true"></video>
         </button>
         <h3>Case MagSafe Matte</h3>
         <p>Acabado mate translúcido que no deja huellas, con anillo magnético.</p>

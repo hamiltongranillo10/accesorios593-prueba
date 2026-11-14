@@ -222,27 +222,26 @@
   });
   show(1);
 
-  /* ===== Videos del catálogo: se cargan y reproducen solo cuando la tarjeta está en pantalla ===== */
-  var vids = $$('.pv');
+  /* ===== Videos del catálogo =====
+     MP4 H.264 (lo decodifica el chip de video del equipo, por eso no pesa).
+     Se descargan solo cuando la tarjeta se acerca, se reproducen solos cuando
+     se ve al menos la mitad y se pausan al salir de la pantalla. */
+  var vids = $$('video.pv');
   if (vids.length && !reduce && 'IntersectionObserver' in window) {
     var vio = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         var v = e.target;
-        if (e.isIntersecting) {
-          if (!v.getAttribute('data-ok')) {
-            var size = v.clientWidth * (window.devicePixelRatio || 1) > 400 ? '544' : '368';
-            var base = v.getAttribute('data-v') + '-' + size;
-            v.innerHTML = '<source src="' + base + '.webm" type="video/webm"><source src="' + base + '.mp4" type="video/mp4">';
-            v.setAttribute('data-ok', '1');
-            v.addEventListener('playing', function () { v.classList.add('on'); });
-            v.load();
+        if (e.intersectionRatio >= 0.5) {
+          if (!v.getAttribute('src')) {
+            v.src = v.getAttribute('data-v');
+            v.addEventListener('playing', function () { v.classList.add('on'); }, { once: true });
           }
           var p = v.play(); if (p && p.catch) p.catch(function () { /* sin reproducción automática: queda la foto */ });
         } else if (!v.paused) {
           v.pause();
         }
       });
-    }, { rootMargin: '150px 0px' });
+    }, { threshold: [0, 0.5] });
     vids.forEach(function (v) { vio.observe(v); });
   }
 
