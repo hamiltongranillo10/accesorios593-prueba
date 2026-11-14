@@ -1,0 +1,14 @@
+# Accesorios 593
+
+> Tienda 100% online de accesorios tecnológicos para iPhone en Guayaquil, Ecuador. Entregas en Guayaquil y envíos a todo Ecuador. Los pedidos se hacen por WhatsApp.
+
+- Productos: fundas de cuero, silicona, transparentes y antigolpes con MagSafe; billeteras MagSafe; baterías MagSafe; cargadores USB-C; cables; vidrio templado; protectores de cámara; audífonos inalámbricos.
+- Precios: se confirman por WhatsApp según modelo y color.
+- Instagram: https://www.instagram.com/accesorios.593/
+- Lema: "Tecnología que te acompaña".
+
+## Páginas
+- [Inicio y catálogo](https://hamiltongranillo10.github.io/accesorios593/)
+- [Términos y condiciones](https://hamiltongranillo10.github.io/accesorios593/terminos.html)
+- [Política de privacidad](https://hamiltongranillo10.github.io/accesorios593/privacidad.html)
+- [Política de cookies](https://hamiltongranillo10.github.io/accesorios593/cookies.html)
