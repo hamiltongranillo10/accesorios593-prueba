@@ -6,8 +6,8 @@
   var $$ = function (s, c) { return Array.prototype.slice.call((c || d).querySelectorAll(s)); };
 
   /* ===== Número de WhatsApp =====
-     Escribe el número en <html data-wa="5939XXXXXXXX"> (código 593, sin + ni espacios).
-     Mientras esté vacío se usa el enlace wa.link del Instagram (no permite mensaje escrito). */
+     Está en <html data-wa="593964067840"> (código 593, sin + ni espacios).
+     Cada botón lleva su propio mensaje en data-msg. */
   var WA = (root.getAttribute('data-wa') || '').replace(/\D/g, '');
   var WA_LINK = 'https://wa.link/zmtexr';
   function waUrl(text) {
@@ -15,7 +15,7 @@
     return WA_LINK;
   }
   var HOLA = '¡Hola Accesorios 593! 👋 Vengo de su página web y quiero información.';
-  $$('.js-wa').forEach(function (a) { a.href = waUrl(HOLA); });
+  $$('.js-wa').forEach(function (a) { a.href = waUrl(a.getAttribute('data-msg') || HOLA); });
 
   var y = $('#y'); if (y) y.textContent = new Date().getFullYear();
 
@@ -122,33 +122,57 @@
   });
 
   /* ===== Pedido por pasos ===== */
-  var models = ['iPhone 17 Pro Max', 'iPhone 17 Pro', 'iPhone Air', 'iPhone 17', 'iPhone 16 Pro Max', 'iPhone 16 Pro',
-    'iPhone 16 / 16 Plus', 'iPhone 16e', 'iPhone 15 Pro Max', 'iPhone 15 Pro', 'iPhone 15 / 15 Plus',
-    'iPhone 14 Pro Max', 'iPhone 14 Pro', 'iPhone 14 / 14 Plus', 'iPhone 13', 'iPhone 12', 'iPhone 11'];
-  var mBox = $('#models');
-  models.forEach(function (m) {
+  var GENS = {
+    '17': ['17 Pro Max', '17 Pro', 'Air', '17'],
+    '16': ['16 Pro Max', '16 Pro', '16 Plus', '16', '16e'],
+    '15': ['15 Pro Max', '15 Pro', '15 Plus', '15'],
+    '14': ['14 Pro Max', '14 Pro', '14 Plus', '14'],
+    '13': ['13 Pro Max', '13 Pro', '13', '13 mini'],
+    '12': ['12 Pro Max', '12 Pro', '12', '12 mini'],
+    '11': ['11 Pro Max', '11 Pro', '11']
+  };
+  var genBox = $('#gen'), verBox = $('#ver'), otroBox = $('#otro-box');
+  function chip(box, name, value, label) {
     var l = d.createElement('label');
-    l.innerHTML = '<input type="radio" name="modelo"><span></span>';
-    l.firstChild.value = m; l.lastChild.textContent = m;
-    mBox.appendChild(l);
+    l.innerHTML = '<input type="radio"><span></span>';
+    l.firstChild.name = name; l.firstChild.value = value; l.lastChild.textContent = label;
+    box.appendChild(l); return l.firstChild;
+  }
+  ['17', '16', '15', '14', '13', '12', '11'].forEach(function (g) { chip(genBox, 'gen', g, g); }); // de la más nueva a la más antigua
+  chip(genBox, 'gen', 'otro', 'Otro');
+  genBox.addEventListener('change', function () {
+    var g = val('gen');
+    verBox.innerHTML = '';
+    otroBox.hidden = g !== 'otro'; verBox.hidden = g === 'otro';
+    if (g === 'otro') { $('#m-otro').focus(); return; }
+    GENS[g].forEach(function (v) {
+      var lab = v.replace(g + ' ', '').replace(/^(\d+)$/, 'iPhone $1');
+      if (v === 'Air') lab = 'Air';
+      chip(verBox, 'ver', v === 'Air' ? 'iPhone Air' : 'iPhone ' + v, lab);
+    });
+    err.textContent = '';
   });
+  verBox.addEventListener('change', function () { // al elegir la versión pasa solo al siguiente paso
+    setTimeout(function () { if (step === 1 && model()) go(2); }, 280);
+  });
+
   var prod = $('#prod');
-  var names = $$('.js-want').map(function (b) { return b.getAttribute('data-p'); });
-  names.concat(['Otro / varios productos']).forEach(function (n) {
+  var ph = d.createElement('option'); ph.value = ''; ph.textContent = 'Elige un producto'; prod.appendChild(ph);
+  $$('.js-want').map(function (b) { return b.getAttribute('data-p'); }).concat(['Otro / varios productos']).forEach(function (n) {
     var o = d.createElement('option'); o.value = o.textContent = n; prod.appendChild(o);
   });
 
-  var f = $('#f'), sets = $$('fieldset', f), step = 1, N = sets.length;
+  var f = $('#f'), sets = $$('fieldset', f), stepsUi = $$('.steps li', f), step = 1, N = sets.length;
   var bNext = $('#next'), bBack = $('#back'), bSend = $('#send'), err = $('#err');
   function val(name) {
     var el = f.querySelector('[name="' + name + '"]:checked') || f.querySelector('[name="' + name + '"]:not([type=radio])');
     return el ? (el.value || '').trim() : '';
   }
-  function model() { return val('otro') || val('modelo'); }
+  function model() { return val('gen') === 'otro' ? val('otro') : val('ver'); }
   function message() {
     var lines = ['¡Hola Accesorios 593! 👋 Quiero hacer un pedido:', '',
       '📱 Modelo: ' + model(),
-      '🛍️ Producto: ' + val('prod')];
+      '🛍️ Producto: ' + (val('prod') || 'Quiero recomendaciones')];
     if (val('color')) lines.push('🎨 Color: ' + val('color'));
     lines.push('🚚 Entrega: ' + val('ent') + (val('ciudad') ? ' — ' + val('ciudad') : ''));
     if (val('nom')) lines.push('🙋 Nombre: ' + val('nom'));
@@ -158,35 +182,36 @@
   function show(n) {
     step = n;
     sets.forEach(function (s) { s.hidden = +s.getAttribute('data-s') !== n; });
-    $('#bar').style.width = (n / N * 100) + '%';
+    stepsUi.forEach(function (li, i) { li.classList.toggle('on', i < n); });
     $('#stp').textContent = 'Paso ' + n + ' de ' + N;
     bBack.hidden = n === 1; bNext.hidden = n === N; bSend.hidden = n !== N;
     err.textContent = '';
     if (n === N) $('#sum').textContent = message();
   }
+  function go(n) {
+    show(n);
+    var leg = sets[n - 1].querySelector('legend'); if (leg) { leg.tabIndex = -1; leg.focus({ preventScroll: true }); }
+  }
   function check() {
-    if (step === 1 && !model()) return 'Elige tu modelo de iPhone o escríbelo.';
+    if (step === 1 && !val('gen')) return 'Elige la generación de tu iPhone.';
+    if (step === 1 && !model()) return val('gen') === 'otro' ? 'Escribe el modelo de tu iPhone.' : 'Elige la versión de tu iPhone.';
+    if (step === 2 && !val('prod')) return 'Elige un producto (o “Otro / varios productos”).';
     if (step === 3 && val('ent') === 'Envío a otra ciudad' && !val('ciudad')) return 'Escribe la ciudad a la que enviamos.';
     return '';
   }
+  f.addEventListener('change', function (e) {
+    if (e.target.name === 'ent') $('#c-opt').textContent = val('ent') === 'Envío a otra ciudad' ? 'obligatorio' : 'opcional';
+  });
   bNext.addEventListener('click', function () {
     var e = check(); if (e) { err.textContent = e; return; }
-    show(step + 1);
-    var leg = sets[step - 1].querySelector('legend'); if (leg) { leg.tabIndex = -1; leg.focus(); }
+    go(step + 1);
   });
-  bBack.addEventListener('click', function () { show(step - 1); });
+  bBack.addEventListener('click', function () { go(step - 1); });
   $('#nom').addEventListener('input', function () { $('#sum').textContent = message(); });
   f.addEventListener('submit', function (e) {
     e.preventDefault();
-    var msg = message();
-    if (!WA && navigator.clipboard) {
-      navigator.clipboard.writeText(msg).catch(function () {});
-      err.textContent = 'Copiamos tu mensaje: pégalo en el chat de WhatsApp que se abrirá.';
-      setTimeout(function () { location.href = waUrl(msg); }, 1200);
-      return;
-    }
     // location.href funciona también dentro de Instagram, TikTok y Facebook (no usan ventanas emergentes).
-    location.href = waUrl(msg);
+    location.href = waUrl(message());
   });
   $$('.js-want').forEach(function (b) {
     b.addEventListener('click', function () {
@@ -229,6 +254,8 @@
       b.addEventListener('click', function () {
         var alt = $('img', b).alt;
         zImg.src = b.getAttribute('data-full'); zImg.alt = alt; zTxt.textContent = alt;
+        var zwa = $('#zwa', zoom);
+        if (zwa) zwa.href = waUrl('¡Hola Accesorios 593! 👋 Me interesa el ' + alt + '. ¿Me confirman precio y colores disponibles?');
         zoom.showModal();
       });
     });
