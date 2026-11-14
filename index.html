@@ -129,6 +129,17 @@ main>section:not(.hero),footer{content-visibility:auto;contain-intrinsic-size:au
 .cols li{width:18px;height:18px;border-radius:50%;border:2px solid #ffffff33}
 .price{font-size:.9rem;color:var(--f);font-weight:800;margin-bottom:10px}
 .card .btn{min-height:44px;font-size:.95rem}
+.ph{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;border-radius:14px;overflow:hidden;background:#141022;margin-bottom:14px;cursor:zoom-in}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.ph:after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #ffffff1f;background:linear-gradient(180deg,transparent 62%,#0b0912a6)}
+.card:hover .ph img{transform:scale(1.06)}
+.card:hover{box-shadow:0 0 0 1px #ff2bd655,0 18px 50px -14px #8b3dffaa}
+.badge{position:absolute;top:10px;left:10px;z-index:1;background:var(--g);color:#fff;font-size:.75rem;font-weight:800;padding:.25em .75em;border-radius:999px;box-shadow:0 4px 14px #ff2bd655}
+#zoom{padding:0;border:0;border-radius:20px;background:#120f1d;width:min(92vw,520px);max-height:92vh;overflow:hidden;box-shadow:0 0 0 1px #8b3dff66,0 30px 80px #000}
+#zoom::backdrop{background:#05040ae6}
+#zoom img{display:block;width:100%;height:auto}
+#zoom p{margin:0;padding:12px 16px;font-weight:800}
+.x{position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;border:0;background:#000b;color:#fff;font-size:1.6rem;line-height:1;cursor:pointer}
 @media (max-width:600px){.grid{grid-template-columns:1fr 1fr;gap:12px}.card{padding:12px}.vis{height:120px}.vis svg{height:94px}.card h3{font-size:1rem}.card p{font-size:.85rem;line-height:1.45}.cols li{width:14px;height:14px}.card .btn{padding:.6em .8em}.ck{font-size:.85rem;padding:12px 14px}}
 /* why */
 .why{background:var(--bg2);border-block:1px solid var(--line)}
@@ -295,97 +306,206 @@ footer a:hover{color:var(--txt)}
       <button type="button" data-f="carga" aria-pressed="false">Carga</button>
       <button type="button" data-f="proteccion" aria-pressed="false">Protección</button>
       <button type="button" data-f="audio" aria-pressed="false">Audio</button>
+      <button type="button" data-f="reloj" aria-pressed="false">Apple Watch</button>
     </div>
     <div class="grid" id="grid">
       <article class="card rv" data-cat="fundas magsafe">
-        <div class="vis"><svg style="color:#9a5a2c" viewBox="0 0 100 190" aria-hidden="true"><use href="#i-case"/></svg></div>
-        <h3>Funda de cuero MagSafe</h3>
-        <p>Acabado tipo cuero, tacto suave y anclaje magnético firme.</p>
-        <ul class="cols" aria-label="Colores: negro, marrón, lila, rosa, azul"><li style="background:#1b1b22"></li><li style="background:#9a5a2c"></li><li style="background:#c9b3f5"></li><li style="background:#f2b8c6"></li><li style="background:#2c4a7a"></li></ul>
+        <button class="ph" type="button" data-full="img/p/funda-cuero-520.webp" aria-label="Ampliar foto: Leather Case MagSafe">
+          <img src="img/p/funda-cuero-340.webp" srcset="img/p/funda-cuero-340.webp 340w, img/p/funda-cuero-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Leather Case MagSafe" loading="lazy" decoding="async">
+        </button>
+        <h3>Leather Case MagSafe</h3>
+        <p>Acabado tipo cuero, tacto suave y anclaje magnético firme. Del iPhone 13 Pro al 16 Pro Max.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Funda de cuero MagSafe">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Leather Case MagSafe">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="fundas magsafe">
-        <div class="vis"><svg style="color:#a45cff" viewBox="0 0 100 190" aria-hidden="true"><use href="#i-case"/></svg></div>
-        <h3>Funda de silicona MagSafe</h3>
-        <p>Interior de microfibra, botones metálicos y muchos colores.</p>
-        <ul class="cols" aria-label="Colores: lila, negro, rosa, azul cielo, amarillo"><li style="background:#a45cff"></li><li style="background:#1b1b22"></li><li style="background:#f2b8c6"></li><li style="background:#9cc4ef"></li><li style="background:#e8f06a"></li></ul>
+        <button class="ph" type="button" data-full="img/p/funda-silicona-520.webp" aria-label="Ampliar foto: Silicone Case MagSafe">
+          <img src="img/p/funda-silicona-340.webp" srcset="img/p/funda-silicona-340.webp 340w, img/p/funda-silicona-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Silicone Case MagSafe" loading="lazy" decoding="async"><span class="badge">iPhone 17</span>
+        </button>
+        <h3>Silicone Case MagSafe</h3>
+        <p>Interior de microfibra y colores de temporada. Disponible para iPhone 17 Pro Max.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Funda de silicona MagSafe">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Silicone Case MagSafe">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="fundas">
+        <button class="ph" type="button" data-full="img/p/funda-madera-520.webp" aria-label="Ampliar foto: Case premium de madera">
+          <img src="img/p/funda-madera-340.webp" srcset="img/p/funda-madera-340.webp 340w, img/p/funda-madera-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case premium de madera" loading="lazy" decoding="async">
+        </button>
+        <h3>Case premium de madera</h3>
+        <p>Textura de madera con marco de cámara metálico. Un diseño clásico y elegante.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Case premium de madera">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="fundas magsafe">
-        <div class="vis"><svg style="color:#cfd4e6" viewBox="0 0 100 190" aria-hidden="true"><use href="#i-case"/></svg></div>
-        <h3>Funda transparente MagSafe</h3>
-        <p>Deja ver el color original de tu iPhone, con imán integrado.</p>
-        <ul class="cols" aria-label="Colores: transparente, ahumado"><li style="background:#e6e9f3"></li><li style="background:#5b5868"></li></ul>
+        <button class="ph" type="button" data-full="img/p/funda-matte-520.webp" aria-label="Ampliar foto: Case MagSafe Matte">
+          <img src="img/p/funda-matte-340.webp" srcset="img/p/funda-matte-340.webp 340w, img/p/funda-matte-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case MagSafe Matte" loading="lazy" decoding="async">
+        </button>
+        <h3>Case MagSafe Matte</h3>
+        <p>Acabado mate translúcido que no deja huellas, con anillo magnético.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Funda transparente MagSafe">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Case MagSafe Matte">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="fundas magsafe">
+        <button class="ph" type="button" data-full="img/p/funda-transparente-520.webp" aria-label="Ampliar foto: Clear Case MagSafe Belkin">
+          <img src="img/p/funda-transparente-340.webp" srcset="img/p/funda-transparente-340.webp 340w, img/p/funda-transparente-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Clear Case MagSafe Belkin" loading="lazy" decoding="async">
+        </button>
+        <h3>Clear Case MagSafe Belkin</h3>
+        <p>Transparente y resistente: luce el color original de tu iPhone.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Clear Case MagSafe Belkin">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="fundas magsafe">
+        <button class="ph" type="button" data-full="img/p/spigen-ultra-hybrid-520.webp" aria-label="Ampliar foto: Spigen Ultra Hybrid MagSafe">
+          <img src="img/p/spigen-ultra-hybrid-340.webp" srcset="img/p/spigen-ultra-hybrid-340.webp 340w, img/p/spigen-ultra-hybrid-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Spigen Ultra Hybrid MagSafe" loading="lazy" decoding="async">
+        </button>
+        <h3>Spigen Ultra Hybrid MagSafe</h3>
+        <p>Espalda rígida transparente y bordes que absorben golpes.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Spigen Ultra Hybrid MagSafe">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="fundas magsafe">
+        <button class="ph" type="button" data-full="img/p/spigen-carbono-520.webp" aria-label="Ampliar foto: Spigen fibra de carbono MagSafe">
+          <img src="img/p/spigen-carbono-340.webp" srcset="img/p/spigen-carbono-340.webp 340w, img/p/spigen-carbono-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Spigen fibra de carbono MagSafe" loading="lazy" decoding="async">
+        </button>
+        <h3>Spigen fibra de carbono MagSafe</h3>
+        <p>Textura de fibra de carbono, delgado y con gran agarre.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Spigen fibra de carbono MagSafe">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="fundas">
-        <div class="vis"><svg style="color:#2b2f2a" viewBox="0 0 100 190" aria-hidden="true"><use href="#i-case"/></svg></div>
-        <h3>Funda antigolpes</h3>
-        <p>Esquinas reforzadas y bordes elevados para cámara y pantalla.</p>
-        <ul class="cols" aria-label="Colores: negro, verde militar, transparente"><li style="background:#1b1b22"></li><li style="background:#3d4a3a"></li><li style="background:#e6e9f3"></li></ul>
+        <button class="ph" type="button" data-full="img/p/otterbox-defender-520.webp" aria-label="Ampliar foto: OtterBox Defender">
+          <img src="img/p/otterbox-defender-340.webp" srcset="img/p/otterbox-defender-340.webp 340w, img/p/otterbox-defender-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="OtterBox Defender" loading="lazy" decoding="async"><span class="badge">iPhone 17</span>
+        </button>
+        <h3>OtterBox Defender</h3>
+        <p>La protección más resistente: varias capas para el día a día más exigente.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Funda antigolpes">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="OtterBox Defender">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="fundas magsafe">
+        <button class="ph" type="button" data-full="img/p/funda-glitter-360-520.webp" aria-label="Ampliar foto: Case 360 MagSafe Glitter">
+          <img src="img/p/funda-glitter-360-340.webp" srcset="img/p/funda-glitter-360-340.webp 340w, img/p/funda-glitter-360-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case 360 MagSafe Glitter" loading="lazy" decoding="async">
+        </button>
+        <h3>Case 360 MagSafe Glitter</h3>
+        <p>Brillo en cada movimiento con esquinas reforzadas y MagSafe.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Case 360 MagSafe Glitter">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="fundas magsafe">
+        <button class="ph" type="button" data-full="img/p/funda-swarovski-520.webp" aria-label="Ampliar foto: Case Swarovski MagSafe">
+          <img src="img/p/funda-swarovski-340.webp" srcset="img/p/funda-swarovski-340.webp 340w, img/p/funda-swarovski-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case Swarovski MagSafe" loading="lazy" decoding="async"><span class="badge">Exclusivo</span>
+        </button>
+        <h3>Case Swarovski MagSafe</h3>
+        <p>Cristales brillantes y anillo MagSafe para un look de lujo.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Case Swarovski MagSafe">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="fundas">
-        <div class="vis"><svg style="color:#6b4428" viewBox="0 0 100 190" aria-hidden="true"><use href="#i-case"/></svg></div>
-        <h3>Funda premium de madera</h3>
-        <p>Diseño clásico con textura de madera y detalles en la cámara.</p>
-        <ul class="cols" aria-label="Colores: nogal, grafito"><li style="background:#6b4428"></li><li style="background:#3a3a40"></li></ul>
+        <button class="ph" type="button" data-full="img/p/funda-rhode-520.webp" aria-label="Ampliar foto: Case Rhode Lip">
+          <img src="img/p/funda-rhode-340.webp" srcset="img/p/funda-rhode-340.webp 340w, img/p/funda-rhode-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Case Rhode Lip" loading="lazy" decoding="async"><span class="badge">Tendencia</span>
+        </button>
+        <h3>Case Rhode Lip</h3>
+        <p>Tu lip gloss favorito siempre a mano, en tu iPhone 17 Pro Max.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Funda premium de madera">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Case Rhode Lip">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="magsafe">
-        <div class="vis"><svg style="color:#c0392b" viewBox="0 0 100 120" aria-hidden="true"><use href="#i-wallet"/></svg></div>
+        <button class="ph" type="button" data-full="img/p/billetera-magsafe-520.webp" aria-label="Ampliar foto: Billetera de cuero MagSafe">
+          <img src="img/p/billetera-magsafe-340.webp" srcset="img/p/billetera-magsafe-340.webp 340w, img/p/billetera-magsafe-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Billetera de cuero MagSafe" loading="lazy" decoding="async">
+        </button>
         <h3>Billetera de cuero MagSafe</h3>
-        <p>Lleva tus tarjetas esenciales pegadas a tu iPhone. Delgada y elegante.</p>
-        <ul class="cols" aria-label="Colores: negro, azul petróleo, marrón, rojo, morado, verde"><li style="background:#1b1b22"></li><li style="background:#2a5b6b"></li><li style="background:#9a5a2c"></li><li style="background:#c0392b"></li><li style="background:#5a4fcf"></li><li style="background:#1f5a3d"></li></ul>
+        <p>Lleva tus tarjetas pegadas a tu iPhone. Delgada y en muchos colores.</p>
         <div class="price">Consulta precio</div>
         <button class="btn btn-p js-want" type="button" data-p="Billetera de cuero MagSafe">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="magsafe carga">
-        <div class="vis"><svg style="color:#8b3dff" viewBox="0 0 100 150" aria-hidden="true"><use href="#i-battery"/></svg></div>
-        <h3>Batería MagSafe</h3>
-        <p>Carga inalámbrica en cualquier lugar: se pega a tu iPhone y listo.</p>
+        <button class="ph" type="button" data-full="img/p/bateria-magsafe-520.webp" aria-label="Ampliar foto: Power bank MagSafe Harvic">
+          <img src="img/p/bateria-magsafe-340.webp" srcset="img/p/bateria-magsafe-340.webp 340w, img/p/bateria-magsafe-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Power bank MagSafe Harvic" loading="lazy" decoding="async">
+        </button>
+        <h3>Power bank MagSafe Harvic</h3>
+        <p>Batería magnética con carga de 18 W para que nunca te quedes sin pila.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Batería MagSafe">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Power bank MagSafe Harvic">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="magsafe carga">
+        <button class="ph" type="button" data-full="img/p/cable-magsafe-520.webp" aria-label="Ampliar foto: Cargador MagSafe">
+          <img src="img/p/cable-magsafe-340.webp" srcset="img/p/cable-magsafe-340.webp 340w, img/p/cable-magsafe-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Cargador MagSafe" loading="lazy" decoding="async">
+        </button>
+        <h3>Cargador MagSafe</h3>
+        <p>Carga inalámbrica magnética con cable trenzado resistente.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Cargador MagSafe">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="carga">
-        <div class="vis"><svg style="color:#f4f4f8" viewBox="0 0 100 130" aria-hidden="true"><use href="#i-charger"/></svg></div>
-        <h3>Cargador rápido USB‑C</h3>
-        <p>Carga rápida para iPhone y AirPods con un adaptador compacto.</p>
+        <button class="ph" type="button" data-full="img/p/adaptador-40w-520.webp" aria-label="Ampliar foto: Adaptador dinámico 40 W">
+          <img src="img/p/adaptador-40w-340.webp" srcset="img/p/adaptador-40w-340.webp 340w, img/p/adaptador-40w-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Adaptador dinámico 40 W" loading="lazy" decoding="async"><span class="badge">Nuevo</span>
+        </button>
+        <h3>Adaptador dinámico 40 W</h3>
+        <p>Doble puerto USB‑C para cargar dos equipos a la vez.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Cargador rápido USB-C">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Adaptador dinámico 40 W">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="carga">
-        <div class="vis"><svg style="color:#f4f4f8" viewBox="0 0 120 130" aria-hidden="true"><use href="#i-cable"/></svg></div>
-        <h3>Cables USB‑C y Lightning</h3>
-        <p>Cables resistentes para carga y datos, en varios largos.</p>
+        <button class="ph" type="button" data-full="img/p/cubo-20w-520.webp" aria-label="Ampliar foto: Cubo de carga 20 W USB‑C">
+          <img src="img/p/cubo-20w-340.webp" srcset="img/p/cubo-20w-340.webp 340w, img/p/cubo-20w-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Cubo de carga 20 W USB‑C" loading="lazy" decoding="async">
+        </button>
+        <h3>Cubo de carga 20 W USB‑C</h3>
+        <p>Carga rápida para tu iPhone en un adaptador compacto.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Cable USB-C / Lightning">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Cubo de carga 20 W USB‑C">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="carga">
+        <button class="ph" type="button" data-full="img/p/cable-usbc-lightning-520.webp" aria-label="Ampliar foto: Cable USB‑C a Lightning">
+          <img src="img/p/cable-usbc-lightning-340.webp" srcset="img/p/cable-usbc-lightning-340.webp 340w, img/p/cable-usbc-lightning-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Cable USB‑C a Lightning" loading="lazy" decoding="async">
+        </button>
+        <h3>Cable USB‑C a Lightning</h3>
+        <p>Carga y datos para iPhone con conector Lightning.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Cable USB‑C a Lightning">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="proteccion">
-        <div class="vis"><svg style="color:#ff2bd6" viewBox="0 0 100 190" aria-hidden="true"><use href="#i-glass"/></svg></div>
-        <h3>Vidrio templado</h3>
-        <p>Protege tu pantalla de golpes y rayones sin perder sensibilidad.</p>
+        <button class="ph" type="button" data-full="img/p/glass-privacidad-520.webp" aria-label="Ampliar foto: Glass Spigen Privacy">
+          <img src="img/p/glass-privacidad-340.webp" srcset="img/p/glass-privacidad-340.webp 340w, img/p/glass-privacidad-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Glass Spigen Privacy" loading="lazy" decoding="async">
+        </button>
+        <h3>Glass Spigen Privacy</h3>
+        <p>Vidrio templado 9H con filtro antiespía: solo tú ves tu pantalla.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Vidrio templado">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Glass Spigen Privacy">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="proteccion">
-        <div class="vis"><svg style="color:#c9c9d6" viewBox="0 0 100 100" aria-hidden="true"><use href="#i-lens"/></svg></div>
-        <h3>Protector de cámara</h3>
-        <p>Anillos de protección para los lentes de tu iPhone.</p>
+        <button class="ph" type="button" data-full="img/p/protector-camara-520.webp" aria-label="Ampliar foto: Protector de cámara metálico">
+          <img src="img/p/protector-camara-340.webp" srcset="img/p/protector-camara-340.webp 340w, img/p/protector-camara-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Protector de cámara metálico" loading="lazy" decoding="async">
+        </button>
+        <h3>Protector de cámara metálico</h3>
+        <p>Anillos de vidrio y metal que protegen cada lente.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Protector de cámara">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="Protector de cámara metálico">Lo quiero</button>
       </article>
       <article class="card rv" data-cat="audio">
-        <div class="vis"><svg style="color:#f4f4f8" viewBox="0 0 130 120" aria-hidden="true"><use href="#i-buds"/></svg></div>
-        <h3>Audífonos inalámbricos</h3>
-        <p>Conexión rápida con tu iPhone y estuche de carga.</p>
+        <button class="ph" type="button" data-full="img/p/airpods-pro-3-520.webp" aria-label="Ampliar foto: AirPods Pro 3">
+          <img src="img/p/airpods-pro-3-340.webp" srcset="img/p/airpods-pro-3-340.webp 340w, img/p/airpods-pro-3-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="AirPods Pro 3" loading="lazy" decoding="async"><span class="badge">Nuevo</span>
+        </button>
+        <h3>AirPods Pro 3</h3>
+        <p>Cancelación activa de ruido y estuche de carga USB‑C.</p>
         <div class="price">Consulta precio</div>
-        <button class="btn btn-p js-want" type="button" data-p="Audífonos inalámbricos">Lo quiero</button>
+        <button class="btn btn-p js-want" type="button" data-p="AirPods Pro 3">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="audio">
+        <button class="ph" type="button" data-full="img/p/airpods-4-520.webp" aria-label="Ampliar foto: AirPods 4 con ANC">
+          <img src="img/p/airpods-4-340.webp" srcset="img/p/airpods-4-340.webp 340w, img/p/airpods-4-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="AirPods 4 con ANC" loading="lazy" decoding="async">
+        </button>
+        <h3>AirPods 4 con ANC</h3>
+        <p>Sonido envolvente y cancelación de ruido en un diseño abierto.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="AirPods 4 con ANC">Lo quiero</button>
+      </article>
+      <article class="card rv" data-cat="reloj">
+        <button class="ph" type="button" data-full="img/p/correas-apple-watch-520.webp" aria-label="Ampliar foto: Correas metálicas para Apple Watch">
+          <img src="img/p/correas-apple-watch-340.webp" srcset="img/p/correas-apple-watch-340.webp 340w, img/p/correas-apple-watch-520.webp 520w" sizes="(max-width:600px) 46vw, 270px" width="340" height="425" alt="Correas metálicas para Apple Watch" loading="lazy" decoding="async">
+        </button>
+        <h3>Correas metálicas para Apple Watch</h3>
+        <p>Malla metálica con cierre magnético, en varios colores.</p>
+        <div class="price">Consulta precio</div>
+        <button class="btn btn-p js-want" type="button" data-p="Correas metálicas para Apple Watch">Lo quiero</button>
       </article>
     </div>
   </div>
@@ -534,6 +654,7 @@ footer a:hover{color:var(--txt)}
   </div>
 </footer>
 
+<dialog id="zoom" aria-label="Foto del producto"><img alt="" width="520" height="650"><p></p><button type="button" class="x" aria-label="Cerrar">×</button></dialog>
 <a class="fab js-wa" href="https://wa.link/zmtexr" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 <script src="js/app.js" defer></script>
 </body>

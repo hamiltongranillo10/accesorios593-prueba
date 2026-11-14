@@ -157,6 +157,21 @@
   });
   show(1);
 
+  /* ===== Ampliar foto del producto ===== */
+  var zoom = $('#zoom');
+  if (zoom && zoom.showModal) {
+    var zImg = $('img', zoom), zTxt = $('p', zoom);
+    $$('.ph').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var alt = $('img', b).alt;
+        zImg.src = b.getAttribute('data-full'); zImg.alt = alt; zTxt.textContent = alt;
+        zoom.showModal();
+      });
+    });
+    $('.x', zoom).addEventListener('click', function () { zoom.close(); });
+    zoom.addEventListener('click', function (e) { if (e.target === zoom) zoom.close(); });
+  }
+
   /* ===== Aviso de cookies (solo informativo: el sitio no usa cookies de seguimiento) ===== */
   var KEY = 'a593-aviso';
   var seen = false;
