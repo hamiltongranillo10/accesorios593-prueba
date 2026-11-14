@@ -12,6 +12,8 @@
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" as="image" href="img/guayaquil-movil.webp" type="image/webp" media="(max-width:820px)" fetchpriority="high">
+<link rel="preload" as="image" href="img/guayaquil-pc.webp" type="image/webp" media="(min-width:821px)" fetchpriority="high">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_EC">
 <meta property="og:site_name" content="Accesorios 593">
@@ -67,8 +69,11 @@ p{margin:0 0 1em}
 .top .btn{min-height:42px;padding:.5em 1.1em;font-size:.95rem}
 @media (max-width:820px){.nav{display:none}}
 /* hero */
-.hero{position:relative;overflow:hidden;padding:56px 0 40px}
-.hero:before{content:"";position:absolute;inset:-20% -10% auto auto;width:70vw;height:70vw;max-width:760px;max-height:760px;background:radial-gradient(closest-side,#8b3dff55,transparent),radial-gradient(closest-side at 70% 80%,#ff2bd640,transparent);pointer-events:none}
+.hero{position:relative;overflow:hidden;isolation:isolate;padding:56px 0 40px;min-height:min(88vh,820px);display:flex;align-items:center}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:60% 100%}
+.hero:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#0b0912 0%,#0b0912d9 28%,#0b091233 60%,transparent 80%),linear-gradient(0deg,#0b0912 0%,transparent 22%)}
+@media (max-width:820px){.hero{min-height:0;display:block}.hero-bg img{object-position:50% 100%}.hero:after{background:linear-gradient(180deg,#0b0912 0%,#0b0912b3 40%,transparent 65%),linear-gradient(0deg,#0b0912 0%,transparent 18%)}}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
 .tag{display:inline-block;padding:.35em .9em;border:1px solid var(--line);border-radius:999px;color:var(--mut);font-size:.9rem;margin-bottom:18px}
 .hero h1{font-size:clamp(2.3rem,7vw,4.4rem);font-weight:900}
@@ -225,6 +230,10 @@ footer a:hover{color:var(--txt)}
 
 <main>
 <section class="hero" aria-labelledby="t-hero">
+  <picture class="hero-bg">
+    <source media="(max-width:820px)" srcset="img/guayaquil-movil.webp" width="720" height="1279">
+    <img src="img/guayaquil-pc.webp" width="1600" height="800" alt="" fetchpriority="high" decoding="async">
+  </picture>
   <div class="wrap">
     <div>
       <span class="tag">📍 Guayaquil · Envíos a todo Ecuador 🇪🇨</span>
