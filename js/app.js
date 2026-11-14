@@ -29,6 +29,8 @@
     revealSetup();
     loadCases();
     rotator();
+    counters();
+    tilt();
   }
   ['pointerdown', 'touchstart', 'keydown', 'scroll', 'wheel'].forEach(function (ev) {
     window.addEventListener(ev, start, { once: true, passive: true });
@@ -44,6 +46,39 @@
     }, { rootMargin: '0px 0px -8% 0px' });
     els.forEach(function (el) {
       if (el.getBoundingClientRect().top < vh) el.classList.add('in'); else io.observe(el);
+    });
+  }
+
+  /* Números que cuentan hacia arriba al aparecer */
+  function counters() {
+    var els = $$('[data-count]');
+    if (!els.length || !('IntersectionObserver' in window)) return;
+    var fmt = function (n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        var el = e.target, end = +el.getAttribute('data-count'), pre = el.getAttribute('data-pre') || '', t0 = performance.now();
+        (function step(t) {
+          var k = Math.min(1, (t - t0) / 1400), v = Math.round(end * (1 - Math.pow(1 - k, 3)));
+          el.textContent = pre + fmt(v);
+          if (k < 1) requestAnimationFrame(step);
+        })(t0);
+      });
+    }, { threshold: .6 });
+    els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* Tarjetas: leve inclinación 3D y brillo que sigue al mouse (solo PC) */
+  function tilt() {
+    if (!window.matchMedia || !matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    $$('#grid .card, .feat > div, .info article').forEach(function (c) {
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        c.style.setProperty('--mx', (x * 100) + '%'); c.style.setProperty('--my', (y * 100) + '%');
+        c.style.transform = 'perspective(900px) rotateX(' + ((.5 - y) * 6).toFixed(2) + 'deg) rotateY(' + ((x - .5) * 6).toFixed(2) + 'deg) translateY(-4px)';
+      });
+      c.addEventListener('pointerleave', function () { c.style.transform = ''; });
     });
   }
 

@@ -12,6 +12,8 @@
 <link rel="icon" href="img/logo.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="preload" href="fonts/unbounded.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" as="image" href="img/guayaquil-movil.webp" type="image/webp" media="(max-width:820px)" fetchpriority="high">
 <link rel="preload" as="image" href="img/guayaquil-pc.webp" type="image/webp" media="(min-width:821px)" fetchpriority="high">
 <meta property="og:type" content="website">
@@ -42,35 +44,43 @@
 ]}
 </script>
 <style>
-:root{--bg:#0b0912;--bg2:#120f1d;--card:#171327;--line:#2a2340;--txt:#f5f2ff;--mut:#bdb5d6;--v:#8b3dff;--v2:#a45cff;--f:#ff2bd6;--ok:#25d366;--r:18px;--g:linear-gradient(120deg,#8b3dff,#ff2bd6)}
+@font-face{font-family:"Unbounded";src:url(fonts/unbounded.woff2) format("woff2");font-weight:400 800;font-display:swap}
+@font-face{font-family:"Manrope";src:url(fonts/manrope.woff2) format("woff2");font-weight:400 800;font-display:swap}
+:root{--fd:"Unbounded","Arial Black",system-ui,sans-serif;--fb:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--wa1:#21c063;--wa2:#0a6b3c;--bg:#0b0912;--bg2:#120f1d;--card:#171327;--line:#2a2340;--txt:#f5f2ff;--mut:#bdb5d6;--v:#8b3dff;--v2:#a45cff;--f:#ff2bd6;--ok:#25d366;--r:18px;--g:linear-gradient(120deg,#8b3dff,#ff2bd6)}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;overflow-x:hidden}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 var(--fb);font-feature-settings:"ss01";-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img,svg{display:block;max-width:100%}
 a{color:inherit}
-h1,h2,h3{line-height:1.1;margin:0 0 .5em;letter-spacing:-.02em}
-h2{font-size:clamp(1.8rem,5vw,2.8rem);font-weight:900}
+h1,h2,h3{font-family:var(--fd);line-height:1.08;margin:0 0 .5em;letter-spacing:-.035em;text-wrap:balance}
+h2{font-size:clamp(1.55rem,4.2vw,2.5rem);font-weight:650}
 p{margin:0 0 1em}
 .wrap{width:min(1160px,100% - 32px);margin-inline:auto}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .grad{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:.75em 1.4em;border-radius:999px;border:0;font:inherit;font-weight:800;text-decoration:none;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.btn{position:relative;overflow:hidden;isolation:isolate;display:inline-flex;align-items:center;justify-content:center;gap:.6em;min-height:50px;padding:.8em 1.55em;border-radius:999px;border:0;font:inherit;font-weight:700;letter-spacing:.01em;text-decoration:none;cursor:pointer;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,#ffffff47 48%,transparent 66%);transform:translateX(-130%);transition:transform .9s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+.btn:hover:after{transform:translateX(130%)}
+.btn:active{transform:scale(.97)}
 .btn:hover{transform:translateY(-2px)}
-.btn-wa{background:var(--ok);color:#06240f;box-shadow:0 8px 30px #25d36633}
-.btn-p{background:var(--g);color:#fff;box-shadow:0 8px 30px #8b3dff55}
-.btn-o{background:transparent;color:var(--txt);border:2px solid var(--line)}
+.btn-wa{background:#0d7a44 linear-gradient(140deg,var(--wa1) 0%,#12924f 48%,var(--wa2) 100%);color:#fff;text-shadow:0 1px 1px #00000040;box-shadow:inset 0 1px 0 #ffffff55,inset 0 -2px 0 #00000030,0 0 0 1px #ffffff14,0 14px 32px -10px #25d366b3}
+.btn-wa:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff66,inset 0 -2px 0 #00000030,0 0 0 1px #ffffff26,0 18px 40px -10px #25d366d9}
+.btn-wa svg{box-sizing:content-box;width:20px;height:20px;padding:5px;margin-left:-.55em;border-radius:50%;background:#ffffff2e;box-shadow:inset 0 0 0 1px #ffffff40}
+.btn-p{background:#7a2ee6 linear-gradient(135deg,#9a52ff 0%,#8b3dff 40%,#d12ad0 100%);color:#fff;box-shadow:inset 0 1px 0 #ffffff47,inset 0 -2px 0 #00000033,0 0 0 1px #ffffff14,0 14px 34px -12px #8b3dffcc}
+.btn-p:hover{transform:translateY(-2px);box-shadow:inset 0 1px 0 #ffffff59,inset 0 -2px 0 #00000033,0 0 0 1px #ffffff26,0 20px 44px -12px #b14dffe6}
+.btn-o{background:#ffffff08;color:var(--txt);box-shadow:inset 0 0 0 1px #ffffff26}
 .btn svg{width:22px;height:22px}
 :focus-visible{outline:3px solid var(--f);outline-offset:3px}
 /* header */
 .top{position:sticky;top:0;z-index:20;background:#0b0912f7;border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px}
-.brand{display:flex;align-items:center;gap:10px;font-weight:900;text-decoration:none;font-size:1.1rem}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--fd);font-weight:600;letter-spacing:-.02em;text-decoration:none;font-size:1rem}
 .brand img{width:40px;height:40px}
 .nav{display:flex;gap:22px}
 .nav a{text-decoration:none;color:var(--mut);font-weight:600}
 .nav a:hover{color:var(--txt)}
-.top .btn{min-height:42px;padding:.5em 1.1em;font-size:.95rem}
+.top .btn{min-height:42px;padding:.45em 1.15em .45em 1.2em;font-size:.9rem}.top .btn-wa svg{width:16px;height:16px;padding:4px}
 @media (max-width:820px){.nav{display:none}}
 /* hero */
 .hero{position:relative;overflow:hidden;isolation:isolate;padding:56px 0 40px;min-height:min(88vh,820px);display:flex;align-items:center}
@@ -79,13 +89,14 @@ p{margin:0 0 1em}
 .hero:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,#0b0912 0%,#0b0912d9 28%,#0b091233 60%,transparent 80%),linear-gradient(0deg,#0b0912 0%,transparent 22%)}
 @media (max-width:820px){.hero{min-height:0;display:block}.hero-bg img{object-position:50% 100%}.hero:after{background:linear-gradient(180deg,#0b0912 0%,#0b0912b3 40%,transparent 65%),linear-gradient(0deg,#0b0912 0%,transparent 18%)}}
 .hero .wrap{position:relative;display:grid;grid-template-columns:1.15fr .85fr;gap:32px;align-items:center}
-.tag{display:inline-block;padding:.35em .9em;border:1px solid var(--line);border-radius:999px;color:var(--mut);font-size:.9rem;margin-bottom:18px}
-.hero h1{font-size:clamp(2.3rem,7vw,4.4rem);font-weight:900}
+.tag{display:inline-flex;align-items:center;gap:.6em;padding:.5em 1em;border:1px solid #ffffff1f;border-radius:999px;background:#ffffff0a;color:#e4dcff;font-size:.7rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:22px}
+.tag i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px #25d36633}
+.hero h1{font-size:clamp(2rem,6vw,3.9rem);font-weight:700;letter-spacing:-.045em}
 .rot{display:inline-block;min-width:6ch}
 .lead{font-size:1.15rem;color:var(--mut);max-width:34em}
 .cta{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 22px}
 .chips{display:flex;flex-wrap:wrap;gap:8px 18px;padding:0;margin:0;list-style:none;color:var(--mut);font-size:.95rem}
-.chips li:before{content:"✓ ";color:var(--f);font-weight:900}
+.chips li{display:flex;align-items:center;gap:.55em}.chips li:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g)}
 .stage{position:relative;height:420px;perspective:900px;display:grid;place-items:center}
 .ring{position:absolute;width:320px;height:320px;border-radius:50%;border:2px dashed #8b3dff66}
 /* fundas reales: van una encima de otra y se cambian con un fundido */
@@ -126,11 +137,11 @@ main>section:not(.hero),footer{content-visibility:auto;contain-intrinsic-size:au
 .card[hidden]{display:none}
 .vis{height:170px;border-radius:14px;background:radial-gradient(circle at 50% 40%,#2a2045,#141022);display:grid;place-items:center;margin-bottom:14px}
 .vis svg{height:130px;width:auto}
-.card h3{font-size:1.1rem;margin-bottom:.3em}
+.card h3{font-size:.98rem;font-weight:600;letter-spacing:-.02em;margin-bottom:.35em}
 .card p{color:var(--mut);font-size:.95rem;flex:1}
 .cols{display:flex;gap:6px;margin:0 0 14px;padding:0;list-style:none}
 .cols li{width:18px;height:18px;border-radius:50%;border:2px solid #ffffff33}
-.price{font-size:.9rem;color:var(--f);font-weight:800;margin-bottom:10px}
+.price{font-size:.72rem;color:#ff8ce6;font-weight:800;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
 .card .btn{min-height:44px;font-size:.95rem}
 .ph{position:relative;display:block;width:100%;aspect-ratio:4/5;padding:0;border:0;border-radius:14px;overflow:hidden;background:#141022;margin-bottom:14px;cursor:zoom-in}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
@@ -151,7 +162,7 @@ main>section:not(.hero),footer{content-visibility:auto;contain-intrinsic-size:au
 .why{background:var(--bg2);border-block:1px solid var(--line)}
 .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
 .feat div{padding:22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
-.feat b{display:block;font-size:2rem;font-weight:900}
+.feat b{display:block;font-family:var(--fd);font-size:2.1rem;font-weight:650;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
 .feat span{color:var(--mut)}
 /* order */
 .order{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;align-items:start}
@@ -162,7 +173,7 @@ form{background:var(--card);border:1px solid var(--line);border-radius:24px;padd
 .stp{font-size:.9rem;color:var(--mut);margin-bottom:16px}
 fieldset{border:0;padding:0;margin:0}
 fieldset[hidden]{display:none}
-legend{font-size:1.3rem;font-weight:900;margin-bottom:14px;padding:0}
+legend{font-family:var(--fd);font-size:1.15rem;font-weight:600;letter-spacing:-.02em;margin-bottom:14px;padding:0}
 .opts{display:flex;flex-wrap:wrap;gap:8px}
 .opts label{cursor:pointer}
 .opts input{position:absolute;opacity:0}
@@ -201,13 +212,41 @@ footer a{color:var(--mut)}
 footer a:hover{color:var(--txt)}
 .copy{grid-column:1/-1;border-top:1px solid var(--line);padding-top:18px;font-size:.85rem}
 /* floating wa */
-.fab{position:fixed;right:16px;bottom:16px;z-index:30;width:60px;height:60px;border-radius:50%;background:var(--ok);display:grid;place-items:center;box-shadow:0 10px 30px #0009}
-.fab svg{width:32px;height:32px;color:#fff}
+.fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:12px;padding:7px 20px 7px 7px;border-radius:999px;background:#120e1cf2;box-shadow:0 0 0 1px #ffffff1c,0 18px 40px -8px #000c,0 0 30px -6px #25d36655;color:var(--txt);text-decoration:none;transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.fab:hover{transform:translateY(-3px);box-shadow:0 0 0 1px #25d36666,0 22px 48px -8px #000d,0 0 40px -4px #25d36688}
+.fab-ic{position:relative;flex:none;display:grid;place-items:center;width:50px;height:50px;border-radius:50%;background:linear-gradient(140deg,var(--wa1),var(--wa2));box-shadow:inset 0 1px 0 #ffffff59,inset 0 -2px 0 #00000033}
+.fab-ic svg{width:26px;height:26px;color:#fff}
+.fab-ic:before{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:0 0 0 0 #25d36699}
+.go .fab-ic:before{animation:ping 2.6s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 #25d36680}80%,100%{box-shadow:0 0 0 16px #25d36600}}
+.fab-ic i{position:absolute;right:1px;top:1px;width:12px;height:12px;border-radius:50%;background:#5dff9c;box-shadow:0 0 0 3px #120e1c}
+.fab-t{display:grid;line-height:1.2}
+.fab-t b{font-family:var(--fd);font-weight:600;font-size:.86rem;letter-spacing:-.01em}
+.fab-t small{font-size:.74rem;color:#b7f5cf}
+@media (max-width:600px){.fab{padding:6px}.fab-t{display:none}.fab-ic{width:56px;height:56px}}
 /* cookie */
 .ck{position:fixed;left:16px;right:16px;bottom:16px;z-index:40;max-width:560px;background:#1b1630;border:1px solid var(--line);border-radius:18px;padding:16px 18px;box-shadow:0 20px 50px #000a;font-size:.92rem}
 .ck p{margin:0 0 12px;color:var(--mut)}
 @media (max-width:600px){.ck{right:88px}}
 .ck .btn{min-height:42px;padding:.45em 1.2em}
+/* ---- animaciones premium (arrancan con la primera interacción) ---- */
+.prog{position:fixed;inset:0 0 auto;height:3px;z-index:60;background:var(--g);transform-origin:0 50%;transform:scaleX(0);pointer-events:none}
+@supports (animation-timeline:scroll()){.go .prog{animation:prog linear both;animation-timeline:scroll(root)}}
+@keyframes prog{to{transform:scaleX(1)}}
+.go .rot{background-size:220% auto;animation:shim 5s linear infinite}
+@keyframes shim{to{background-position:220% center}}
+.aura{position:absolute;width:380px;height:380px;border-radius:50%;background:conic-gradient(from 0deg,#8b3dff00 0deg,#8b3dff80 90deg,#ff2bd666 160deg,#8b3dff00 230deg);-webkit-mask:radial-gradient(closest-side,#000 55%,transparent);mask:radial-gradient(closest-side,#000 55%,transparent);opacity:.75}
+.go .aura{animation:spin 9s linear infinite}
+@media (max-width:820px){.aura{width:290px;height:290px}}
+.go .hero .btn-wa:after{animation:shine 5s cubic-bezier(.2,.8,.2,1) 1.5s infinite}
+@keyframes shine{0%,55%{transform:translateX(-130%)}75%,100%{transform:translateX(130%)}}
+.card{--mx:50%;--my:0%;transform-style:preserve-3d}
+.card:before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s;background:radial-gradient(420px circle at var(--mx) var(--my),#a45cff26,transparent 45%)}
+.card:hover:before{opacity:1}
+.card{position:relative}
+h2 .grad{display:inline-block}
+.go section h2.rv{clip-path:inset(0 0 100% 0);transform:translateY(18px);transition:clip-path .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),opacity .6s}
+.go section h2.rv.in{clip-path:inset(0 0 -10% 0);transform:none}
 /* reveal */
 .go .rv{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
 .go .rv.in{opacity:1;transform:none}
@@ -231,6 +270,7 @@ footer a:hover{color:var(--txt)}
 </defs>
 </svg>
 
+<div class="prog" aria-hidden="true"></div>
 <a class="sr" href="#catalogo">Saltar al catálogo</a>
 <header class="top">
   <div class="wrap">
@@ -253,7 +293,7 @@ footer a:hover{color:var(--txt)}
   </picture>
   <div class="wrap">
     <div>
-      <span class="tag">📍 Guayaquil · Envíos a todo Ecuador 🇪🇨</span>
+      <span class="tag"><i></i>Guayaquil · Envíos a todo Ecuador</span>
       <h1 id="t-hero">Todo para tu iPhone:<br><span class="grad rot" id="rot">fundas MagSafe</span></h1>
       <p class="lead">Accesorios tecnológicos de calidad, elegidos para combinar con tu estilo. Escoge, escríbenos por WhatsApp y te lo llevamos.</p>
       <div class="cta">
@@ -267,7 +307,7 @@ footer a:hover{color:var(--txt)}
       </ul>
     </div>
     <div class="stage" aria-hidden="true">
-      <div class="ring"></div>
+      <div class="aura"></div><div class="ring"></div>
       <div class="case3d" id="cases">
         <img class="on" src="img/cases/cuero-negro.webp" width="301" height="520" alt="" fetchpriority="high" decoding="async">
         <img data-src="img/cases/cuero-cafe.webp" width="278" height="520" alt="" decoding="async">
@@ -309,7 +349,7 @@ footer a:hover{color:var(--txt)}
 
 <section id="catalogo" aria-labelledby="t-cat">
   <div class="wrap">
-    <h2 id="t-cat">Nuestro <span class="grad">catálogo</span></h2>
+    <h2 id="t-cat" class="rv">Nuestro <span class="grad">catálogo</span></h2>
     <p class="sub">Precios y colores según el modelo de tu iPhone. Toca <b>“Lo quiero”</b> y te lo confirmamos por WhatsApp.</p>
     <div class="tabs" role="group" aria-label="Filtrar por categoría" id="tabs">
       <button type="button" data-f="todo" aria-pressed="true">Todo</button>
@@ -525,12 +565,12 @@ footer a:hover{color:var(--txt)}
 
 <section class="why" aria-labelledby="t-why">
   <div class="wrap">
-    <h2 id="t-why">¿Por qué <span class="grad">Accesorios 593</span>?</h2>
+    <h2 id="t-why" class="rv">¿Por qué <span class="grad">Accesorios 593</span>?</h2>
     <p class="sub">Tecnología que te acompaña: te ayudamos a elegir el accesorio correcto para tu modelo.</p>
     <div class="feat">
-      <div class="rv"><b class="grad">+1.000</b><span>productos publicados en nuestro Instagram</span></div>
-      <div class="rv"><b class="grad">+2.300</b><span>seguidores que nos eligen</span></div>
-      <div class="rv"><b class="grad">🇪🇨 24</b><span>provincias a las que enviamos</span></div>
+      <div class="rv"><b class="grad" data-count="1000" data-pre="+">+1.000</b><span>productos publicados en nuestro Instagram</span></div>
+      <div class="rv"><b class="grad" data-count="2300" data-pre="+">+2.300</b><span>seguidores que nos eligen</span></div>
+      <div class="rv"><b class="grad" data-count="24">24</b><span>provincias a las que enviamos</span></div>
       <div class="rv"><b class="grad">1 a 1</b><span>atención personalizada por WhatsApp</span></div>
     </div>
   </div>
@@ -539,9 +579,9 @@ footer a:hover{color:var(--txt)}
 <section id="pedido" aria-labelledby="t-ped">
   <div class="wrap order">
     <div>
-      <h2 id="t-ped">Haz tu pedido en <span class="grad">4 pasos</span></h2>
+      <h2 id="t-ped" class="rv">Haz tu pedido en <span class="grad">4 pasos</span></h2>
       <p class="sub">Responde unas preguntas y se abrirá WhatsApp con tu pedido ya escrito. Solo tienes que tocar “enviar”.</p>
-      <p class="note">🔒 No guardamos tus datos: el mensaje se arma en tu teléfono y solo se envía cuando tú lo decides.</p>
+      <p class="note">No guardamos tus datos: el mensaje se arma en tu teléfono y solo se envía cuando tú lo decides.</p>
     </div>
     <form id="f" novalidate>
       <div class="bar" aria-hidden="true"><i id="bar"></i></div>
@@ -592,18 +632,18 @@ footer a:hover{color:var(--txt)}
 
 <section id="envios" class="why" aria-labelledby="t-env">
   <div class="wrap">
-    <h2 id="t-env">Envíos y <span class="grad">pagos</span></h2>
+    <h2 id="t-env" class="rv">Envíos y <span class="grad">pagos</span></h2>
     <div class="info">
       <article class="rv">
-        <h3>🚚 Envíos a todo Ecuador</h3>
+        <h3>Envíos a todo Ecuador</h3>
         <p>Enviamos a todas las provincias por courier. El costo y el tiempo dependen de tu ciudad: te los confirmamos antes de pagar.</p>
       </article>
       <article class="rv">
-        <h3>🛵 Entregas en Guayaquil</h3>
+        <h3>Entregas en Guayaquil</h3>
         <p>Coordinamos la entrega en tu sector. Escríbenos y acordamos el día y la hora.</p>
       </article>
       <article class="rv">
-        <h3>💳 Formas de pago</h3>
+        <h3>Formas de pago</h3>
         <p>Te indicamos las formas de pago disponibles al confirmar tu pedido por WhatsApp.</p>
       </article>
     </div>
@@ -612,7 +652,7 @@ footer a:hover{color:var(--txt)}
 
 <section id="preguntas" aria-labelledby="t-faq">
   <div class="wrap">
-    <h2 id="t-faq">Preguntas <span class="grad">frecuentes</span></h2>
+    <h2 id="t-faq" class="rv">Preguntas <span class="grad">frecuentes</span></h2>
     <details><summary>¿Hacen envíos a todo Ecuador?</summary><p>Sí. Hacemos entregas en Guayaquil y envíos a todas las provincias del Ecuador.</p></details>
     <details><summary>¿Tienen tienda física?</summary><p>Por ahora atendemos 100% online desde Guayaquil. Pronto anunciaremos nuestra nueva dirección en redes sociales.</p></details>
     <details><summary>¿Cómo hago un pedido?</summary><p>Elige tu producto en la web y envíanos el pedido por WhatsApp. Te confirmamos precio, color disponible y forma de entrega.</p></details>
@@ -624,7 +664,7 @@ footer a:hover{color:var(--txt)}
 <section aria-labelledby="t-sor">
   <div class="wrap">
     <div class="promo rv">
-      <h2 id="t-sor">🎁 Participa en nuestros <span class="grad">sorteos</span></h2>
+      <h2 id="t-sor">Participa en nuestros <span class="grad">sorteos</span></h2>
       <p>Síguenos en Instagram: ahí publicamos los sorteos, las novedades y los productos que van llegando.</p>
       <div class="soc">
         <a class="btn btn-p" href="https://www.instagram.com/accesorios.593/" rel="noopener" target="_blank"><svg aria-hidden="true"><use href="#i-ig"/></svg>@accesorios.593</a>
@@ -667,7 +707,7 @@ footer a:hover{color:var(--txt)}
 </footer>
 
 <dialog id="zoom" aria-label="Foto del producto"><img alt="" width="520" height="650"><p></p><button type="button" class="x" aria-label="Cerrar">×</button></dialog>
-<a class="fab js-wa" href="https://wa.link/zmtexr" rel="noopener" aria-label="Escríbenos por WhatsApp"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+<a class="fab js-wa" href="https://wa.link/zmtexr" rel="noopener" aria-label="Escríbenos por WhatsApp"><span class="fab-ic"><svg aria-hidden="true"><use href="#i-wa"/></svg><i></i></span><span class="fab-t" aria-hidden="true"><b>Escríbenos</b><small>Pedidos por WhatsApp</small></span></a>
 <script src="js/app.js" defer></script>
 </body>
 </html>
