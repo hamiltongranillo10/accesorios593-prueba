@@ -8,7 +8,7 @@
 - Lema: "Tecnología que te acompaña".
 
 ## Páginas
-- [Inicio y catálogo](https://hamiltongranillo10.github.io/accesorios593/)
-- [Términos y condiciones](https://hamiltongranillo10.github.io/accesorios593/terminos.html)
-- [Política de privacidad](https://hamiltongranillo10.github.io/accesorios593/privacidad.html)
-- [Política de cookies](https://hamiltongranillo10.github.io/accesorios593/cookies.html)
+- [Inicio y catálogo](https://eternaluzacademy.com/accesorios593-prueba/)
+- [Términos y condiciones](https://eternaluzacademy.com/accesorios593-prueba/terminos.html)
+- [Política de privacidad](https://eternaluzacademy.com/accesorios593-prueba/privacidad.html)
+- [Política de cookies](https://eternaluzacademy.com/accesorios593-prueba/cookies.html)
