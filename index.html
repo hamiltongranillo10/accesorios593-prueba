@@ -84,13 +84,12 @@ p{margin:0 0 1em}
 .chips li:before{content:"✓ ";color:var(--f);font-weight:900}
 .stage{position:relative;height:420px;perspective:900px;display:grid;place-items:center}
 .ring{position:absolute;width:320px;height:320px;border-radius:50%;border:2px dashed #8b3dff66}
-.case3d{position:relative;width:170px;height:330px;transform-style:preserve-3d;transform:rotateY(-18deg) rotateX(6deg)}
-.case3d .face{position:absolute;inset:0;border-radius:36px;background:var(--cc,#a45cff);box-shadow:inset 0 0 0 6px #ffffff22,inset -18px 0 40px #00000040,0 30px 60px #00000080;transition:background .8s}
-.case3d .face:after{content:"";position:absolute;inset:0;border-radius:36px;background:linear-gradient(115deg,#ffffff38,transparent 40%)}
-.cam{position:absolute;top:16px;left:16px;width:76px;height:76px;border-radius:22px;background:#00000040;display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:8px}
-.cam i{display:block;border-radius:50%;background:#110d18;border:3px solid #ffffff55}
-.cam i:nth-child(4){background:none;border:0}
-.mag{position:absolute;left:50%;top:56%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;border:3px solid #ffffff40}
+/* fundas reales: van una encima de otra y se cambian con un fundido */
+.case3d{position:relative;width:200px;height:346px;transform:rotateY(-14deg) rotateX(4deg)}
+.case3d:before{content:"";position:absolute;inset:8% -30% -6%;background:radial-gradient(closest-side,#8b3dff66,transparent 70%);z-index:-1}
+.case3d:after{content:"";position:absolute;left:12%;right:12%;bottom:-18px;height:22px;border-radius:50%;background:radial-gradient(closest-side,#000c,transparent)}
+.case3d img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(.94);transition:opacity .7s,transform .7s}
+.case3d img.on{opacity:1;transform:none}
 .logo-c{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:36px;opacity:.55}
 .go .case3d{animation:sway 6s ease-in-out infinite}
 .go .ring{animation:spin 24s linear infinite}
@@ -101,7 +100,7 @@ p{margin:0 0 1em}
 .dots button[aria-pressed=true]{border-color:#fff;box-shadow:0 0 0 3px #ff2bd6}
 .dots{bottom:0}
 .stage{padding-bottom:40px}
-@media (max-width:820px){.hero{padding-top:36px}.hero .wrap{grid-template-columns:1fr}.stage{height:340px}.case3d{width:136px;height:264px}.case3d .face,.case3d .face:after{border-radius:30px}.ring{width:250px;height:250px}.cam{width:62px;height:62px;top:12px;left:12px}.mag{width:78px;height:78px;margin:-39px 0 0 -39px}}
+@media (max-width:820px){.hero{padding-top:36px}.hero .wrap{grid-template-columns:1fr}.stage{height:340px}.case3d{width:150px;height:260px}.ring{width:250px;height:250px}}
 /* marquee */
 .mq{border-block:1px solid var(--line);background:var(--bg2);overflow:hidden;padding:18px 0}
 .mq-t{display:flex;gap:16px;width:max-content}
@@ -262,13 +261,19 @@ footer a:hover{color:var(--txt)}
     </div>
     <div class="stage" aria-hidden="true">
       <div class="ring"></div>
-      <div class="case3d"><div class="face" id="face"><div class="cam"><i></i><i></i><i></i><i></i></div><div class="mag"></div></div></div>
+      <div class="case3d" id="cases">
+        <img class="on" src="img/cases/cuero-negro.webp" width="301" height="520" alt="" fetchpriority="high" decoding="async">
+        <img data-src="img/cases/cuero-cafe.webp" width="278" height="520" alt="" decoding="async">
+        <img data-src="img/cases/cuero-lila.webp" width="276" height="520" alt="" decoding="async">
+        <img data-src="img/cases/cuero-rosado.webp" width="276" height="520" alt="" decoding="async">
+        <img data-src="img/cases/cuero-azul.webp" width="276" height="520" alt="" decoding="async">
+      </div>
       <div class="dots" id="dots">
-        <button type="button" tabindex="-1" style="background:#a45cff" data-c="#a45cff" aria-pressed="true"></button>
-        <button type="button" tabindex="-1" style="background:#1b1b22" data-c="#26232e" aria-pressed="false"></button>
-        <button type="button" tabindex="-1" style="background:#9a5a2c" data-c="#9a5a2c" aria-pressed="false"></button>
-        <button type="button" tabindex="-1" style="background:#f2b8c6" data-c="#f2b8c6" aria-pressed="false"></button>
-        <button type="button" tabindex="-1" style="background:#2c4a7a" data-c="#2c4a7a" aria-pressed="false"></button>
+        <button type="button" tabindex="-1" style="background:#1b1b22" aria-label="Color negro" aria-pressed="true"></button>
+        <button type="button" tabindex="-1" style="background:#9a5a2c" aria-label="Color cafe" aria-pressed="false"></button>
+        <button type="button" tabindex="-1" style="background:#c9b3f5" aria-label="Color lila" aria-pressed="false"></button>
+        <button type="button" tabindex="-1" style="background:#efc4bb" aria-label="Color rosado" aria-pressed="false"></button>
+        <button type="button" tabindex="-1" style="background:#2c4a7a" aria-label="Color azul" aria-pressed="false"></button>
       </div>
     </div>
   </div>

@@ -27,6 +27,7 @@
     started = true;
     root.classList.add('go');
     revealSetup();
+    loadCases();
     rotator();
   }
   ['pointerdown', 'touchstart', 'keydown', 'scroll', 'wheel'].forEach(function (ev) {
@@ -46,12 +47,16 @@
     });
   }
 
-  /* Texto dinámico + color de la funda */
+  /* Texto dinámico + fundas reales que cambian de color */
   var words = ['fundas MagSafe', 'billeteras', 'cargadores', 'vidrios templados', 'audífonos'];
-  var face = $('#face'), dots = $$('#dots button'), rot = $('#rot');
+  var caseImgs = $$('#cases img'), dots = $$('#dots button'), rot = $('#rot');
+  function loadCases() { // las otras 4 fotos se cargan solo cuando hacen falta
+    caseImgs.forEach(function (im) { var s = im.getAttribute('data-src'); if (s) { im.src = s; im.removeAttribute('data-src'); } });
+  }
   function setColor(i) {
-    if (!face || !dots[i]) return;
-    face.style.setProperty('--cc', dots[i].getAttribute('data-c'));
+    if (!caseImgs[i]) return;
+    loadCases();
+    caseImgs.forEach(function (im, j) { im.classList.toggle('on', j === i); });
     dots.forEach(function (b, j) { b.setAttribute('aria-pressed', j === i ? 'true' : 'false'); });
   }
   dots.forEach(function (b, i) { b.addEventListener('click', function () { setColor(i); }); });
